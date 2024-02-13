@@ -445,9 +445,10 @@ class Application(object):
         )
 
         # Postprocess predictions to create label image
-        label_image = self._postprocess(output_images, **postprocess_kwargs)
+        #label_image = self._postprocess(output_images, **postprocess_kwargs)
 
         # Resize label_image back to original resolution if necessary
-        label_image = self._resize_output(label_image, image.shape)
+        #label_image = self._resize_output(label_image, image.shape)
 
-        return label_image
+        #return label_image
+        return output_images
