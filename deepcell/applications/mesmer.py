@@ -191,6 +191,12 @@ class Mesmer(Application):
     Args:
         model (tf.keras.Model): The model to load. If ``None``,
             a pre-trained model will be downloaded.
+            
+        preprocessing_fn_mesmer (function): Pre-processing function to apply to data prior to prediction.
+
+        postprocessing_fn_mesmer (function): Post-processing function to apply to data after prediction.
+        
+        Must accept an input of a list of arrays and then return a single array.
     """
 
     #: Metadata for the dataset used to train the model
@@ -210,7 +216,10 @@ class Mesmer(Application):
         'validation_steps_per_epoch': 193 // 1
     }
 
-    def __init__(self, model=None):
+    def __init__(self, 
+                 model=None,
+                 preprocessing_fn_mesmer=mesmer_preprocess,
+                 postprocessing_fn_mesmer==mesmer_postprocess):
 
         if model is None:
             archive_path = tf.keras.utils.get_file(
@@ -225,8 +234,8 @@ class Mesmer(Application):
             model,
             model_image_shape=model.input_shape[1:],
             model_mpp=0.5,
-            preprocessing_fn=mesmer_preprocess,
-            postprocessing_fn=mesmer_postprocess,
+            preprocessing_fn=preprocessing_fn_mesmer,
+            postprocessing_fn=postprocessing_fn_mesmer,
             format_model_output_fn=format_output_mesmer,
             dataset_metadata=self.dataset_metadata,
             model_metadata=self.model_metadata)
