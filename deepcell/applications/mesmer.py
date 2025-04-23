@@ -219,7 +219,7 @@ class Mesmer(Application):
     def __init__(self, 
                  model=None,
                  preprocessing_fn_mesmer=mesmer_preprocess,
-                 postprocessing_fn_mesmer==mesmer_postprocess):
+                 postprocessing_fn_mesmer=mesmer_postprocess):
 
         if model is None:
             archive_path = tf.keras.utils.get_file(
